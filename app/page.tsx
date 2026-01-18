@@ -18,39 +18,48 @@ export default function Home() {
     <div
       className={`${spaceGrotesk.className} bg-[#101922] min-h-screen text-white`}
     >
-      <div className="flex items-center justify-center gap-4 p-4">
+      <div className="flex flex-row md:flex-row items-center justify-center gap-4 p-4 md:gap-8 md:p-8">
         <div>
           <Image
             src="/photo.png"
-            width={200}
-            height={200}
+            width={300}
+            height={300}
             alt="my photo"
-            className="rounded-full"
+            className="rounded-full md:w-[300px] md:h-[300px]"
           />
         </div>
-        <div className={`flex flex-col text-left mt-4 gap-2`}>
-          <h1 className="text-white text-2xl font-bold">Brayan Chumpitaz</h1>
-          <h2 className="text-[#a7a7a7] text-xl">Frontend Developer</h2>
-
-          <a
-            href="https://www.linkedin.com/in/brayanchumpitaz/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#3575ff] dark:text-[#6481ff] hover:underline border border-[#3575ff] rounded-xl p-2 flex justify-center items-center w-fit gap-1 hover:bg-[#e1eaff] dark:hover:bg-[#3a3b3c] transition-colors duration-300"
-          >
-            <FaLinkedin className="text-[#6481ff] text-2xl" /> LinkedIn
-          </a>
-          <a
-            href="mailto:brayanchumpitaz9@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#3575ff] dark:text-[#6481ff] hover:underline border border-[#3575ff] rounded-xl p-2 flex justify-center items-center w-fit gap-1 hover:bg-[#e1eaff] dark:hover:bg-[#3a3b3c] transition-colors duration-300"
-          >
-            <MdOutgoingMail className="text-[#6481ff] text-2xl" /> Contáctame
-          </a>
+        <div className={`flex flex-col text-left mt-4 md:mt-0 gap-2`}>
+          <h1 className="text-white text-2xl md:text-4xl font-bold">
+            Brayan Chumpitaz
+          </h1>
+          <h2 className="text-[#a7a7a7] text-xl md:text-2xl">
+            Frontend Developer
+          </h2>
+          <div className="flex flex-col md:flex-row gap-3">
+            <a
+              href="https://www.linkedin.com/in/brayanchumpitaz/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#3575ff] dark:text-[#6481ff] hover:underline border border-[#3575ff] rounded-xl p-2 flex justify-center items-center w-fit gap-1 hover:bg-[#e1eaff] dark:hover:bg-[#3a3b3c] transition-colors duration-300 md:p-3 md:text-lg"
+            >
+              <FaLinkedin className="text-[#6481ff] text-2xl md:text-3xl" />{" "}
+              LinkedIn
+            </a>
+            <a
+              href="mailto:brayanchumpitaz9@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#3575ff] dark:text-[#6481ff] hover:underline border border-[#3575ff] rounded-xl p-2 flex justify-center items-center w-fit gap-1 hover:bg-[#e1eaff] dark:hover:bg-[#3a3b3c] transition-colors duration-300 md:p-3 md:text-lg"
+            >
+              <MdOutgoingMail className="text-[#6481ff] text-2xl md:text-3xl" />{" "}
+              Contáctame
+            </a>
+          </div>
         </div>
       </div>
-      <div className={`flex flex-col p-4 gap-4`}>
+      <div
+        className={`flex flex-col p-4 gap-4 md:p-8 md:gap-4 max-w-4xl mx-auto`}
+      >
         <div>
           <p className="font-bold text-xl flex items-center gap-2">
             <IoMdBriefcase />

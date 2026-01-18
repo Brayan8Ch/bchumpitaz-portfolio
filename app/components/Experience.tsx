@@ -9,7 +9,7 @@ interface ExperienceProps {
 
 function Experience({ company, role, date, activities }: ExperienceProps) {
   return (
-    <div className="w-full border border-[#545557] bg-[#13202a] p-3 rounded-lg flex flex-col gap-2">
+    <div className="w-full border border-[#545557] bg-[#13202a] p-3 md:p-4 rounded-lg flex flex-col gap-2 md:gap-4">
       <div className="flex flex-col gap-2">
         <div>
           <p className="font-bold text-[#ffb224] text-xl">{role}</p>
