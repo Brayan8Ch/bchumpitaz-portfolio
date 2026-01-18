@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Space_Grotesk } from "next/font/google";
 import Experience from "./components/Experience";
 import Tecnologies from "./components/Tecnologies";
-import { FaLinkedin } from "react-icons/fa";
+import { FaLinkedin, FaUser } from "react-icons/fa";
 import { IoMdBriefcase } from "react-icons/io";
 import { IoCodeSlash } from "react-icons/io5";
 import { MdOutgoingMail } from "react-icons/md";
@@ -87,6 +87,40 @@ export default function Home() {
             { name: "Javascript", icon: "javascript" },
           ]}
         />
+        <div className="flex flex-col">
+          <p className="font-bold text-xl flex items-center gap-2">
+            <FaUser />
+            Sobre mi
+          </p>
+          <hr />
+        </div>
+        <p>
+          Me llamo Brayan Chumpitaz Angeles. Soy Ingeniero de Sistemas y
+          actualmente me encuentro liderando iniciativas para{" "}
+          <span className="text-amber-300">
+            mejorar la experiencia universitaria de estudiantes de todo el Perú.
+          </span>
+        </p>
+        <p>
+          Algunos de mis logros incluyen{" "}
+          <span className="text-amber-300">
+            participar en el Programa de Extensión Universitaria de OSIPTEL{" "}
+          </span>{" "}
+          para el desarrollo de proyectos que mejoraron el acceso a información
+          de los servicios de telecomunicaciones a nivel nacional.
+        </p>
+        <hr />
+        <div className="flex justify-between text-sm text-[#a7a7a7]">
+          <p> 2026 - Brayan Chumpitaz Angeles.</p>
+          <a
+            href="mailto:brayanchumpitaz9@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            Contacto
+          </a>
+        </div>
       </div>
     </div>
   );
