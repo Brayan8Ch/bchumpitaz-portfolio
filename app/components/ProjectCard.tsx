@@ -1,9 +1,12 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 interface ProjectCardProps {
   title: string;
-  image: string;
+  images: { src: string; alt: string }[];
   description: string;
   technologies: { name: string; icon: string }[];
   size?: "small" | "medium" | "large";
@@ -14,7 +17,7 @@ interface ProjectCardProps {
 
 function ProjectCard({
   title,
-  image,
+  images,
   description,
   technologies,
   size = "small",
@@ -22,6 +25,18 @@ function ProjectCard({
   demoUrl,
   isPublic = false,
 }: ProjectCardProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToPrevious = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const goToNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
   const sizeClasses = {
     small: "",
     medium: "md:col-span-2",
@@ -31,34 +46,90 @@ function ProjectCard({
   return (
     <div
       className={`
-        w-full border border-[#545557] bg-[#13202a] rounded-lg
+        w-full bg-surface-secondary border border-border-primary rounded-xl
         flex flex-col overflow-hidden
-        hover:scale-[1.02] hover:shadow-lg hover:shadow-[#3575ff]/10
-        transition-all duration-300 ease-in-out
+        hover:border-accent-primary/50 hover:shadow-xl hover:shadow-accent
+        transition-all duration-300 group
         ${sizeClasses[size]}
       `}
     >
+      {/* Image Carousel */}
       <div
-        className={`relative w-full ${size === "large" ? "aspect-[16/10]" : "aspect-video"}`}
+        className={`relative w-full ${size === "large" ? "aspect-[16/9]" : "aspect-video"} overflow-hidden bg-canvas`}
       >
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover"
-        />
+        {images.length > 0 && (
+          <img
+            src={images[currentIndex].src}
+            alt={images[currentIndex].alt}
+            className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500"
+          />
+        )}
+
+        {/* Carousel Navigation */}
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={goToPrevious}
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-[#111827]/90 backdrop-blur-sm border border-[#374151] text-white hover:bg-[#1f2937] hover:border-[#10b981] transition-all duration-200 hover:scale-110"
+              aria-label="Imagen anterior"
+            >
+              <IoChevronBack className="text-lg" />
+            </button>
+            <button
+              onClick={goToNext}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-[#111827]/90 backdrop-blur-sm border border-[#374151] text-white hover:bg-[#1f2937] hover:border-[#10b981] transition-all duration-200 hover:scale-110"
+              aria-label="Imagen siguiente"
+            >
+              <IoChevronForward className="text-lg" />
+            </button>
+
+            {/* Dots - Always visible */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 bg-[#111827]/80 backdrop-blur-sm px-3 py-2 rounded-full">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentIndex(index);
+                  }}
+                  className={`rounded-full transition-all duration-200 ${
+                    index === currentIndex
+                      ? "bg-[#10b981] w-6 h-2"
+                      : "bg-[#6b7280] w-2 h-2 hover:bg-[#9ca3af]"
+                  }`}
+                  aria-label={`Ir a imagen ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Image counter */}
+            <div className="absolute top-3 left-3 bg-[#111827]/80 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-lg">
+              {currentIndex + 1} / {images.length}
+            </div>
+          </>
+        )}
+
+        {/* Private Badge */}
+        {!isPublic && (
+          <div className="absolute top-3 right-3 bg-surface/80 backdrop-blur-sm text-muted text-xs px-2.5 py-1 rounded-lg border border-border-primary">
+            Privado
+          </div>
+        )}
       </div>
 
-      <div className="p-3 md:p-4 flex flex-col gap-2 md:gap-3 flex-1">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="font-semibold text-white text-lg md:text-xl">{title}</h3>
+      <div className="p-4 md:p-5 flex flex-col gap-3 flex-1">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-semibold text-primary text-lg md:text-xl leading-tight">
+            {title}
+          </h3>
           {isPublic && (repoUrl || demoUrl) && (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5 shrink-0">
               {repoUrl && (
                 <a
                   href={repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#a7a7a7] hover:text-[#3575ff] transition-colors duration-200"
+                  className="text-muted hover:text-primary transition-colors duration-200"
                   aria-label="Ver repositorio"
                 >
                   <FaGithub className="text-xl" />
@@ -69,7 +140,7 @@ function ProjectCard({
                   href={demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#a7a7a7] hover:text-[#ffb224] transition-colors duration-200"
+                  className="text-muted hover:text-accent-primary transition-colors duration-200"
                   aria-label="Ver demo"
                 >
                   <FaExternalLinkAlt className="text-lg" />
@@ -79,18 +150,18 @@ function ProjectCard({
           )}
         </div>
 
-        <p className="text-[#a7a7a7] text-sm md:text-base line-clamp-3">
+        <p className="text-muted text-sm md:text-base line-clamp-3 leading-relaxed">
           {description}
         </p>
 
-        <div className="flex flex-wrap gap-1.5 md:gap-2 mt-auto pt-2">
+        <div className="flex flex-wrap gap-2 mt-auto pt-2">
           {technologies.map((tech, index) => (
             <span
               key={index}
-              className="flex items-center gap-1 bg-[#27323c] border border-[#404d53] px-2 py-1 rounded-full text-xs md:text-sm"
+              className="flex items-center gap-1.5 bg-surface border border-border-primary px-2.5 py-1.5 rounded-lg text-xs md:text-sm text-secondary hover:border-accent-primary/40 transition-colors"
             >
               <img
-                className="h-4 md:h-5"
+                className="h-4 md:h-4"
                 src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.icon}/${tech.icon}-original.svg`}
                 alt={tech.name}
               />

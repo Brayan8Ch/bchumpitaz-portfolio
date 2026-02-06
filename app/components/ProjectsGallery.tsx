@@ -4,7 +4,7 @@ import ProjectCard from "./ProjectCard";
 interface Project {
   id: string;
   title: string;
-  image: string;
+  images: { src: string; alt: string }[];
   description: string;
   technologies: { name: string; icon: string }[];
   size?: "small" | "medium" | "large";
@@ -24,7 +24,7 @@ function ProjectsGallery({ projects }: ProjectsGalleryProps) {
         <ProjectCard
           key={project.id}
           title={project.title}
-          image={project.image}
+          images={project.images}
           description={project.description}
           technologies={project.technologies}
           size={project.size}
