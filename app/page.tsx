@@ -110,7 +110,7 @@ export default function Home() {
               <span>LinkedIn</span>
             </a>
             <a
-              href="https://github.com/bchumpitaz"
+              href="https://github.com/Brayan8Ch"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-3 text-primary bg-surface-secondary hover:bg-surface-hover border border-border-primary hover:border-accent-primary rounded-xl px-4 py-3 transition-all duration-200"
@@ -160,7 +160,7 @@ export default function Home() {
             <Experience
               company="Universidad Tecnológica del Perú"
               role="Analista de Retención"
-              date="2023 - Actualidad"
+              date="Sep 2025 - Actualidad"
               logo="/logoutp.png"
               activities={[
                 "Diseñé flujo automatizado con n8n e IA (83% precisión) para detectar asignaciones docentes incompatibles",
@@ -173,9 +173,9 @@ export default function Home() {
           {/* Card de Experiencia OSIPTEL */}
           <BentoCard className="md:col-span-7" delay={400}>
             <Experience
-              company="OSIPTEL"
-              role="Desarrollador - Programa de Extensión Universitaria"
-              date="2022 - 2023"
+              company="Organismo Supervisor de Inversión Privada en Telecomunicaciones"
+              role="Practicante Pre Profesional"
+              date="Abr 2025 - Ago 2025"
               logo="/logoosiptel.png"
               activities={[
                 "Desarrollé aplicación web para mejorar el acceso a información de servicios de telecomunicaciones",
@@ -213,19 +213,22 @@ export default function Home() {
                   id: "2",
                   title: "SUMA OSIPTEL",
                   images: [
-                    { src: "/proyecto-suma.png", alt: "Sistema SUMA OSIPTEL" },
+                    { src: "/proyecto-suma.png", alt: "Sistema SUMA OSIPTEL 1" },
+                    { src: "/proyecto-suma-2.png", alt: "Sistema SUMA OSIPTEL 2" },
+                    { src: "/proyecto-suma-3.png", alt: "Sistema SUMA OSIPTEL 3" },
+
                   ],
                   description:
-                    "Plataforma web desarrollada para OSIPTEL que facilita el acceso a información de servicios de telecomunicaciones y mejora la experiencia del usuario.",
+                    "Página web desarrollada para OSIPTEL que facilita el acceso a información de los voluntariados realizados por la institución.",
                   technologies: [
-                    { name: "React", icon: "react" },
+                    { name: "HTML", icon: "html5" },
                     { name: "JavaScript", icon: "javascript" },
                     { name: "CSS3", icon: "css3" },
                   ],
                   size: "medium",
-                  isPublic: false,
-                  repoUrl: "https://github.com/usuario/suma-osiptel",
-                  demoUrl: "https://suma.osiptel.gob.pe",
+                  isPublic: true,
+                  repoUrl: "https://github.com/zsergio1/Suma-osiptel",
+                  demoUrl: "https://zsergio1.github.io/Suma-osiptel/",
                 },
               ]}
             />

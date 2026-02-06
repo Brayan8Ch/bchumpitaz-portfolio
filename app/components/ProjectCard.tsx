@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
@@ -26,21 +26,51 @@ function ProjectCard({
   isPublic = false,
 }: ProjectCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [direction, setDirection] = useState<"left" | "right">("right");
 
   const goToPrevious = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (isAnimating) return;
+    setDirection("left");
+    setIsAnimating(true);
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   const goToNext = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (isAnimating) return;
+    setDirection("right");
+    setIsAnimating(true);
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
+
+  const goToIndex = (e: React.MouseEvent, index: number) => {
+    e.stopPropagation();
+    if (isAnimating || index === currentIndex) return;
+    setDirection(index > currentIndex ? "right" : "left");
+    setIsAnimating(true);
+    setCurrentIndex(index);
+  };
+
+  useEffect(() => {
+    if (isAnimating) {
+      const timer = setTimeout(() => setIsAnimating(false), 400);
+      return () => clearTimeout(timer);
+    }
+  }, [isAnimating]);
 
   const sizeClasses = {
     small: "",
     medium: "md:col-span-2",
     large: "md:col-span-2 md:row-span-2",
+  };
+
+  const getAnimationClass = () => {
+    if (!isAnimating) return "";
+    return direction === "right"
+      ? "animate-slide-in-right"
+      : "animate-slide-in-left";
   };
 
   return (
@@ -58,11 +88,14 @@ function ProjectCard({
         className={`relative w-full ${size === "large" ? "aspect-[16/9]" : "aspect-video"} overflow-hidden bg-canvas`}
       >
         {images.length > 0 && (
-          <img
-            src={images[currentIndex].src}
-            alt={images[currentIndex].alt}
-            className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500"
-          />
+          <div className={`w-full h-full ${getAnimationClass()}`}>
+            <img
+              key={currentIndex}
+              src={images[currentIndex].src}
+              alt={images[currentIndex].alt}
+              className="w-full h-full object-contain"
+            />
+          </div>
         )}
 
         {/* Carousel Navigation */}
@@ -70,14 +103,16 @@ function ProjectCard({
           <>
             <button
               onClick={goToPrevious}
-              className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-[#111827]/90 backdrop-blur-sm border border-[#374151] text-white hover:bg-[#1f2937] hover:border-[#10b981] transition-all duration-200 hover:scale-110"
+              disabled={isAnimating}
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-[#111827]/90 backdrop-blur-sm border border-[#374151] text-white hover:bg-[#1f2937] hover:border-[#10b981] transition-all duration-200 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Imagen anterior"
             >
               <IoChevronBack className="text-lg" />
             </button>
             <button
               onClick={goToNext}
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-[#111827]/90 backdrop-blur-sm border border-[#374151] text-white hover:bg-[#1f2937] hover:border-[#10b981] transition-all duration-200 hover:scale-110"
+              disabled={isAnimating}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-[#111827]/90 backdrop-blur-sm border border-[#374151] text-white hover:bg-[#1f2937] hover:border-[#10b981] transition-all duration-200 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Imagen siguiente"
             >
               <IoChevronForward className="text-lg" />
@@ -88,11 +123,9 @@ function ProjectCard({
               {images.map((_, index) => (
                 <button
                   key={index}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setCurrentIndex(index);
-                  }}
-                  className={`rounded-full transition-all duration-200 ${
+                  onClick={(e) => goToIndex(e, index)}
+                  disabled={isAnimating}
+                  className={`rounded-full transition-all duration-300 disabled:cursor-not-allowed ${
                     index === currentIndex
                       ? "bg-[#10b981] w-6 h-2"
                       : "bg-[#6b7280] w-2 h-2 hover:bg-[#9ca3af]"
