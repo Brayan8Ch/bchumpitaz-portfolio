@@ -144,7 +144,7 @@ function ProjectCard({
 
         {/* Private Badge */}
         {!isPublic && (
-          <div className="absolute top-3 right-3 bg-surface/80 backdrop-blur-sm text-muted text-xs px-2.5 py-1 rounded-lg border border-border-primary">
+          <div className="absolute top-3 right-3 bg-[#111827]/80 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-lg">
             Privado
           </div>
         )}
