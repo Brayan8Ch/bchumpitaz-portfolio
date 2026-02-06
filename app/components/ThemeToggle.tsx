@@ -29,20 +29,20 @@ function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="w-10 h-10 rounded-xl bg-[#1f2937] border border-[#374151]" />
+      <div className="w-10 h-10 rounded-xl bg-surface-secondary border border-border-primary" />
     );
   }
 
   return (
     <button
       onClick={toggleTheme}
-      className="group w-10 h-10 rounded-xl bg-[#1f2937] border border-[#374151]
-        hover:border-[#10b981] hover:bg-[#111827]
+      className="group w-10 h-10 rounded-xl bg-surface-secondary border border-border-primary
+        hover:border-[#10b981] hover:bg-surface-hover
         transition-all duration-300 flex items-center justify-center"
       aria-label={`Cambiar a tema ${theme === "dark" ? "claro" : "oscuro"}`}
     >
       {theme === "dark" ? (
-        <HiOutlineSun className="w-5 h-5 text-amber-400 group-hover:text-amber-300 transition-colors duration-200" />
+        <HiOutlineSun className="w-5 h-5 text-[#10b981] group-hover:text-[#34d399] transition-colors duration-200" />
       ) : (
         <HiOutlineMoon className="w-5 h-5 text-[#10b981] group-hover:text-[#34d399] transition-colors duration-200" />
       )}
