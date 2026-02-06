@@ -2,10 +2,12 @@ import Image from "next/image";
 import { Space_Grotesk } from "next/font/google";
 import Experience from "./components/Experience";
 import Tecnologies from "./components/Tecnologies";
+import ProjectsGallery from "./components/ProjectsGallery";
 import { FaLinkedin, FaUser } from "react-icons/fa";
 import { IoMdBriefcase } from "react-icons/io";
 import { IoCodeSlash } from "react-icons/io5";
 import { MdOutgoingMail } from "react-icons/md";
+import { GoProject } from "react-icons/go";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -77,6 +79,33 @@ export default function Home() {
             "Lideré iniciativas de mejora continua con equipos multidisciplinarios, optimizando procesos de retención y experiencia estudiantil",
           ]}
         ></Experience>
+        <div className="flex flex-col">
+          <p className="font-bold text-xl flex items-center gap-2">
+            <GoProject />
+            Proyectos
+          </p>
+          <hr />
+        </div>
+        <ProjectsGallery
+          projects={[
+            {
+              id: "1",
+              title: "Control de Asignación Docente (CAD)",
+              image: "/proyecto-cad.png",
+              description:
+                "Descripción del proyecto público con enlaces visibles al repositorio y demo.",
+              technologies: [
+                { name: "React", icon: "react" },
+                { name: "TypeScript", icon: "typescript" },
+                { name: "Vite", icon: "/vitejs" }
+              ],
+              size: "large",
+              isPublic: false,
+              repoUrl: "https://github.com/usuario/proyecto",
+              demoUrl: "https://proyecto.vercel.app",
+            },
+          ]}
+        />
         <div>
           <p className="font-bold text-xl flex items-center gap-2">
             <IoCodeSlash />
@@ -118,6 +147,7 @@ export default function Home() {
           para el desarrollo de proyectos que mejoraron el acceso a información
           de los servicios de telecomunicaciones a nivel nacional.
         </p>
+
         <hr />
         <div className="flex justify-between text-sm text-[#a7a7a7]">
           <p> 2026 - Brayan Chumpitaz Angeles.</p>
