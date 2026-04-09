@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "code-reviewing": {
+      "source": "melodic-software/claude-code-plugins",
+      "sourceType": "github",
+      "computedHash": "08db0c6afa3a01d44e411cdbaae73cb8c6b8f913bf79f3051dba59b090e4ec64"
+    }
+  }
+}
