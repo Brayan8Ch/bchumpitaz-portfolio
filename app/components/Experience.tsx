@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 interface ExperienceProps {
   company: string;
@@ -14,10 +15,12 @@ function Experience({ company, role, date, logo, activities }: ExperienceProps) 
       {/* Logo */}
       {logo && (
         <div className="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white dark:bg-white flex items-center justify-center p-2 overflow-hidden group-hover:scale-105 transition-transform duration-300 shadow-sm">
-          <img
+          <Image
             src={logo}
             alt={company}
-            className="w-full h-full object-contain"
+            width={56}
+            height={56}
+            className="object-contain"
           />
         </div>
       )}

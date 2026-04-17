@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
@@ -88,12 +89,14 @@ function ProjectCard({
         className={`relative w-full ${size === "large" ? "aspect-[16/9]" : "aspect-video"} overflow-hidden bg-canvas`}
       >
         {images.length > 0 && (
-          <div className={`w-full h-full ${getAnimationClass()}`}>
-            <img
-              key={currentIndex}
+          <div key={currentIndex} className={`relative w-full h-full ${getAnimationClass()}`}>
+            <Image
               src={images[currentIndex].src}
               alt={images[currentIndex].alt}
-              className="w-full h-full object-contain"
+              fill
+              className="object-contain"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              loading="lazy"
             />
           </div>
         )}
@@ -194,9 +197,12 @@ function ProjectCard({
               className="flex items-center gap-1.5 bg-surface border border-border-primary px-2.5 py-1.5 rounded-lg text-xs md:text-sm text-secondary hover:border-accent-primary/40 transition-colors"
             >
               <img
-                className="h-4 md:h-4"
+                className="h-4 w-4"
                 src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.icon}/${tech.icon}-original.svg`}
                 alt={tech.name}
+                width={16}
+                height={16}
+                loading="lazy"
               />
               {tech.name}
             </span>

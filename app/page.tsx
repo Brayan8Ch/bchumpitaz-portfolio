@@ -73,10 +73,12 @@ export default function Home() {
             <div className="shrink-0 relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-[#10b981] to-[#6366f1] rounded-2xl opacity-0 group-hover:opacity-50 blur transition-opacity duration-300" />
               <Image
-                src="/photo.png"
+                src="/photo.webp"
                 width={180}
                 height={180}
                 alt="Brayan Chumpitaz"
+                priority
+                sizes="(max-width: 768px) 128px, 176px"
                 className="relative rounded-2xl w-32 h-32 md:w-44 md:h-44 object-cover group-hover:scale-[1.02] transition-transform duration-300"
               />
             </div>
@@ -161,7 +163,7 @@ export default function Home() {
               company="Universidad Tecnológica del Perú"
               role="Analista de Retención"
               date="Sep 2025 - Actualidad"
-              logo="/logoutp.png"
+              logo="/logoutp.webp"
               activities={[
                 "Diseñé flujo automatizado con n8n e IA (83% precisión) para detectar asignaciones docentes incompatibles",
                 "Desarrollé plataforma web para centralizar comunicaciones multicanal, eliminando dependencia de Excel",
@@ -176,7 +178,7 @@ export default function Home() {
               company="Organismo Supervisor de Inversión Privada en Telecomunicaciones"
               role="Practicante Pre Profesional"
               date="Abr 2025 - Ago 2025"
-              logo="/logoosiptel.png"
+              logo="/logoosiptel.webp"
               activities={[
                 "Desarrollé aplicación web para mejorar el acceso a información de servicios de telecomunicaciones",
                 "Implementé dashboards interactivos para visualización de datos de cobertura y calidad de servicio",
@@ -194,8 +196,8 @@ export default function Home() {
                   id: "1",
                   title: "Control de Asignación Docente (CAD)",
                   images: [
-                    { src: "/proyecto-cad.png", alt: "Interfaz principal del sistema CAD" },
-                    { src: "/flujon8n.png", alt: "Flujo de automatización con n8n e IA" },
+                    { src: "/proyecto-cad.webp", alt: "Interfaz principal del sistema CAD" },
+                    { src: "/flujon8n.webp", alt: "Flujo de automatización con n8n e IA" },
                   ],
                   description:
                     "Sistema para detectar asignaciones docentes incompatibles usando flujos automatizados con n8n e IA. Logró 83% de precisión en la detección de incompatibilidades.",
@@ -213,10 +215,9 @@ export default function Home() {
                   id: "2",
                   title: "SUMA OSIPTEL",
                   images: [
-                    { src: "/proyecto-suma.png", alt: "Sistema SUMA OSIPTEL 1" },
-                    { src: "/proyecto-suma-2.png", alt: "Sistema SUMA OSIPTEL 2" },
-                    { src: "/proyecto-suma-3.png", alt: "Sistema SUMA OSIPTEL 3" },
-
+                    { src: "/proyecto-suma.webp", alt: "Sistema SUMA OSIPTEL 1" },
+                    { src: "/proyecto-suma-2.webp", alt: "Sistema SUMA OSIPTEL 2" },
+                    { src: "/proyecto-suma-3.webp", alt: "Sistema SUMA OSIPTEL 3" },
                   ],
                   description:
                     "Página web desarrollada para OSIPTEL que facilita el acceso a información de los voluntariados realizados por la institución.",
