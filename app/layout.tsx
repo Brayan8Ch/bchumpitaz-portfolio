@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -7,38 +7,27 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Portfolio - Brayan Chumpitaz",
-  description: "Frontend Developer | Ingeniero de Sistemas liderando iniciativas tecnológicas en Perú.",
+  description: "Systems Engineer & Frontend Developer building impactful tech in Peru.",
 };
 
-// Script to prevent flash of wrong theme
-const themeScript = `
-  (function() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-    } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      document.documentElement.classList.toggle('dark', prefersDark);
-    }
-  })();
-`;
+
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" className="dark" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body
-        className={`${geistSans.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${spaceGrotesk.variable} antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>

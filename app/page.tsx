@@ -1,20 +1,16 @@
 import Image from "next/image";
-import { Space_Grotesk } from "next/font/google";
-import Experience from "./components/Experience";
+import NavSidebar from "./components/NavSidebar";
+import InteractiveBackground from "./components/InteractiveBackground";
+import AsciiHero from "./components/AsciiHero";
+import Timeline from "./components/Timeline";
 import Tecnologies from "./components/Tecnologies";
 import ProjectsGallery from "./components/ProjectsGallery";
-import ThemeToggle from "./components/ThemeToggle";
-import { FaLinkedin, FaUser, FaGithub } from "react-icons/fa";
-import { IoMdBriefcase } from "react-icons/io";
+import { HiUser, HiBriefcase, HiFolderOpen, HiCpuChip } from "react-icons/hi2";
 import { IoCodeSlash } from "react-icons/io5";
-import { MdOutgoingMail } from "react-icons/md";
-import { GoProject } from "react-icons/go";
+import ScrollReveal from "./components/ScrollReveal";
+import AsciiCheems from "./components/AsciiCheems";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+// ─── Shared primitives ───────────────────────────────────────────────────────
 
 function BentoCard({
   children,
@@ -26,265 +22,287 @@ function BentoCard({
   delay?: number;
 }) {
   return (
-    <div
-      className={`
-        bg-surface border border-border-primary rounded-2xl p-5 md:p-6
-        hover:border-border-secondary hover:shadow-lg hover:shadow-accent
-        transition-all duration-300
-        animate-fade-in-up
-        ${className}
-      `}
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
+    <ScrollReveal delay={delay} className={className}>
+      <div
+        className={`
+          relative group bg-surface border border-border-primary rounded-2xl p-5 md:p-6
+          hover:border-border-secondary hover:shadow-lg hover:shadow-accent hover:-translate-y-1
+          transition-all duration-300 overflow-hidden h-full
+        `}
+      >
+        {children}
+      </div>
+    </ScrollReveal>
   );
 }
 
 function SectionHeader({
   icon,
   title,
+  tag,
 }: {
   icon: React.ReactNode;
   title: string;
+  tag: string;
 }) {
   return (
-    <div className="flex items-center gap-2 mb-4">
-      <span className="text-accent-primary">{icon}</span>
-      <h2 className="font-bold text-lg md:text-xl text-primary">{title}</h2>
-    </div>
+    <ScrollReveal className="mb-20">
+      <p className="font-mono text-xs text-muted mb-2 tracking-wide">{`// ${tag}`}</p>
+      <div className="flex items-center gap-4">
+        <span className="text-accent-primary text-xl shrink-0">{icon}</span>
+        <h2 className="text-2xl md:text-3xl font-bold text-primary">{title}</h2>
+        <div className="flex-1 h-px bg-border-primary" />
+      </div>
+    </ScrollReveal>
   );
 }
 
+// ─── Page ────────────────────────────────────────────────────────────────────
+
 export default function Home() {
   return (
-    <div className={`${spaceGrotesk.className} bg-canvas min-h-screen text-primary`}>
-      {/* Theme Toggle - Fixed Position */}
-      <div className="fixed top-4 right-4 z-50 animate-fade-in" style={{ animationDelay: "800ms" }}>
-        <ThemeToggle />
-      </div>
+    <div className="bg-canvas text-primary min-h-screen">
+      <NavSidebar />
 
-      <div className="max-w-6xl mx-auto p-4 md:p-8">
-        {/* Bento Grid Principal */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
+      <main className="lg:pl-16">
 
-          {/* Hero Card - Presentación */}
-          <BentoCard className="md:col-span-8 flex flex-col md:flex-row items-center gap-6" delay={0}>
-            <div className="shrink-0 relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-[#10b981] to-[#6366f1] rounded-2xl opacity-0 group-hover:opacity-50 blur transition-opacity duration-300" />
-              <Image
-                src="/photo.webp"
-                width={180}
-                height={180}
-                alt="Brayan Chumpitaz"
-                priority
-                sizes="(max-width: 768px) 128px, 176px"
-                className="relative rounded-2xl w-32 h-32 md:w-44 md:h-44 object-cover group-hover:scale-[1.02] transition-transform duration-300"
-              />
-            </div>
-            <div className="flex flex-col text-center md:text-left gap-3">
-              <div>
-                <h1 className="text-primary text-2xl md:text-4xl font-bold">
-                  Brayan Chumpitaz
-                </h1>
-                <p className="text-accent-primary text-lg md:text-xl mt-1 font-medium">
-                  Frontend Developer
+        {/* ═══════════════ HERO ═══════════════ */}
+        <section
+          id="hero"
+          className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+        >
+          <InteractiveBackground />
+          <div className="absolute inset-0 bg-white/70 dark:bg-black/35 z-[1]" />
+          <div className="relative z-10 w-full max-w-2xl mx-auto px-4">
+            <AsciiHero />
+          </div>
+        </section>
+
+        {/* ═══════════════ SOBRE MÍ ═══════════════ */}
+        <section id="sobre-mi" className="relative bg-canvas dot-grid py-24 overflow-hidden">
+          {/* Ambient Glow */}
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
+          <div className="max-w-5xl mx-auto px-4 md:px-8 relative z-10">
+            <SectionHeader icon={<HiUser />} title="Sobre mí" tag="about_me.tsx" />
+
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+              {/* Bio */}
+              <BentoCard className="lg:col-span-3 order-2 lg:order-1" delay={0}>
+                {/* Terminal comment header */}
+                <p className="font-mono text-xs text-muted mb-4 select-none">
+                  {'/* brayan_chumpitaz_angeles.txt */'}
                 </p>
-              </div>
-              <p className="text-muted text-sm md:text-base max-w-md">
-                Ingeniero de Sistemas liderando iniciativas para mejorar la experiencia universitaria de estudiantes en Perú.
-              </p>
-            </div>
-          </BentoCard>
+                <div className="space-y-4 text-secondary leading-relaxed">
+                  <p>
+                    Soy{" "}
+                    <span className="text-primary font-semibold">Ingeniero de Sistemas</span>{" "}
+                    liderando iniciativas para{" "}
+                    <span className="text-accent-primary font-medium">
+                      mejorar la experiencia universitaria de estudiantes de todo el Perú.
+                    </span>
+                  </p>
+                  <p>
+                    Participé en el{" "}
+                    <span className="text-accent-primary font-medium">
+                      Programa de Extensión Universitaria de OSIPTEL
+                    </span>{" "}
+                    mejorando el acceso a información de telecomunicaciones a nivel nacional.
+                  </p>
+                  <p>
+                    Me apasiona crear soluciones tecnológicas que generen impacto real,
+                    combinando desarrollo frontend moderno con automatización e inteligencia artificial.
+                  </p>
+                </div>
+              </BentoCard>
 
-          {/* Card de Contacto */}
-          <BentoCard className="md:col-span-4 flex flex-col justify-center gap-3" delay={100}>
-            <p className="text-muted text-sm font-medium uppercase tracking-wider mb-1">
-              Conecta conmigo
-            </p>
-            <a
-              href="https://www.linkedin.com/in/brayanchumpitaz/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 text-primary bg-surface-secondary hover:bg-surface-hover border border-border-primary hover:border-accent-primary rounded-xl px-4 py-3 transition-all duration-200"
-            >
-              <FaLinkedin className="text-[#0a66c2] text-xl group-hover:scale-110 transition-transform" />
-              <span>LinkedIn</span>
-            </a>
-            <a
-              href="https://github.com/Brayan8Ch"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 text-primary bg-surface-secondary hover:bg-surface-hover border border-border-primary hover:border-accent-primary rounded-xl px-4 py-3 transition-all duration-200"
-            >
-              <FaGithub className="text-primary text-xl group-hover:scale-110 transition-transform" />
-              <span>GitHub</span>
-            </a>
+              {/* Photo + location */}
+              <ScrollReveal delay={100} className="lg:col-span-2 flex flex-col items-center gap-6 order-1 lg:order-2">
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-br from-[#10b981] to-[#6366f1] rounded-2xl opacity-0 group-hover:opacity-40 blur transition-opacity duration-500" />
+                  <Image
+                    src="/photo.webp"
+                    width={220}
+                    height={220}
+                    alt="Brayan Chumpitaz"
+                    priority
+                    sizes="220px"
+                    className="relative rounded-2xl w-40 h-40 md:w-52 md:h-52 object-cover border border-border-primary group-hover:scale-[1.02] transition-transform duration-300"
+                  />
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-border-primary bg-surface text-sm font-mono">
+                  <span className="w-2 h-2 rounded-full bg-accent-primary animate-pulse-glow shrink-0" />
+                  <span className="text-muted">Lima, Peru</span>
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════ EXPERIENCIA ═══════════════ */}
+        <section id="experiencia" className="relative bg-surface py-24 overflow-hidden">
+          {/* Ambient Glow */}
+          <div className="absolute top-1/2 right-0 w-80 h-80 bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none -translate-y-1/2" />
+          <div className="max-w-5xl mx-auto px-4 md:px-8 relative z-10">
+            <SectionHeader icon={<HiBriefcase />} title="Experiencia Laboral" tag="work_experience.ts" />
+
+            <Timeline
+              items={[
+                {
+                  company: "Universidad Tecnológica del Perú",
+                  role: "Analista de Retención",
+                  date: "Sep 2025 – Actualidad",
+                  logo: "/logoutp.webp",
+                  current: true,
+                  activities: [
+                    "Diseñé flujo automatizado con n8n e IA (83% precisión) para detectar asignaciones docentes incompatibles",
+                    "Desarrollé plataforma web para centralizar comunicaciones multicanal, eliminando dependencia de Excel",
+                    "Lideré iniciativas de mejora continua con equipos multidisciplinarios",
+                  ],
+                },
+                {
+                  company: "Organismo Supervisor de Inversión Privada en Telecomunicaciones",
+                  role: "Practicante Pre Profesional",
+                  date: "Abr 2025 – Ago 2025",
+                  logo: "/logoosiptel.webp",
+                  activities: [
+                    "Desarrollé aplicación web para mejorar el acceso a información de servicios de telecomunicaciones",
+                    "Implementé dashboards interactivos para visualización de datos de cobertura y calidad de servicio",
+                    "Colaboré con equipos multidisciplinarios para definir requerimientos técnicos",
+                  ],
+                },
+              ]}
+            />
+          </div>
+        </section>
+
+        {/* ═══════════════ PROYECTOS ═══════════════ */}
+        <section id="proyectos" className="relative bg-canvas dot-grid py-24 overflow-hidden">
+          {/* Ambient Glow */}
+          <div className="absolute bottom-0 left-10 w-[500px] h-[500px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
+          <div className="max-w-5xl mx-auto px-4 md:px-8 relative z-10">
+            <SectionHeader icon={<HiFolderOpen />} title="Proyectos" tag="projects/index.ts" />
+
+            <BentoCard delay={0}>
+              <p className="font-mono text-xs text-muted mb-5 select-none">
+                {'// featured projects'}
+              </p>
+              <ProjectsGallery
+                projects={[
+                  {
+                    id: "1",
+                    title: "Control de Asignación Docente (CAD)",
+                    images: [
+                      { src: "/proyecto-cad.webp", alt: "Interfaz principal del sistema CAD" },
+                      { src: "/flujon8n.webp", alt: "Flujo de automatización con n8n e IA" },
+                    ],
+                    description:
+                      "Sistema para detectar asignaciones docentes incompatibles usando flujos automatizados con n8n e IA. Logró 83% de precisión en la detección de incompatibilidades.",
+                    technologies: [
+                      { name: "React", icon: "react" },
+                      { name: "TypeScript", icon: "typescript" },
+                      { name: "Vite", icon: "vitejs" },
+                    ],
+                    size: "medium",
+                    isPublic: false,
+                    repoUrl: "https://github.com/usuario/proyecto",
+                    demoUrl: "https://proyecto.vercel.app",
+                  },
+                  {
+                    id: "2",
+                    title: "SUMA OSIPTEL",
+                    images: [
+                      { src: "/proyecto-suma.webp", alt: "Sistema SUMA OSIPTEL 1" },
+                      { src: "/proyecto-suma-2.webp", alt: "Sistema SUMA OSIPTEL 2" },
+                      { src: "/proyecto-suma-3.webp", alt: "Sistema SUMA OSIPTEL 3" },
+                    ],
+                    description:
+                      "Página web desarrollada para OSIPTEL que facilita el acceso a información de los voluntariados realizados por la institución.",
+                    technologies: [
+                      { name: "HTML", icon: "html5" },
+                      { name: "JavaScript", icon: "javascript" },
+                      { name: "CSS3", icon: "css3" },
+                    ],
+                    size: "medium",
+                    isPublic: true,
+                    repoUrl: "https://github.com/zsergio1/Suma-osiptel",
+                    demoUrl: "https://zsergio1.github.io/Suma-osiptel/",
+                  },
+                ]}
+              />
+            </BentoCard>
+          </div>
+        </section>
+
+        {/* ═══════════════ TECNOLOGÍAS ═══════════════ */}
+        <section id="tecnologias" className="relative bg-surface py-24 overflow-hidden">
+          {/* Ambient Glow */}
+          <div className="absolute top-10 right-1/4 w-72 h-72 bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none" />
+          <div className="max-w-5xl mx-auto px-4 md:px-8 relative z-10">
+            <SectionHeader icon={<HiCpuChip />} title="Tecnologías" tag="stack.config.ts" />
+
+            <BentoCard delay={0}>
+              <p className="font-mono text-xs text-muted mb-5 select-none">
+                {'// tools I work with'}
+              </p>
+              <Tecnologies
+                categories={[
+                  {
+                    title: "Frontend",
+                    items: [
+                      { name: "React", icon: "react" },
+                      { name: "Next.js", icon: "nextjs" },
+                      { name: "TypeScript", icon: "typescript" },
+                      { name: "JavaScript", icon: "javascript" },
+                      { name: "Tailwind CSS", icon: "tailwindcss" },
+                      { name: "HTML5", icon: "html5" },
+                      { name: "CSS3", icon: "css3" },
+                    ],
+                  },
+                  {
+                    title: "Backend",
+                    items: [
+                      { name: "Node.js", icon: "nodejs" },
+                      { name: "Python", icon: "python" },
+                      { name: "PostgreSQL", icon: "postgresql" },
+                    ],
+                  },
+                  {
+                    title: "Herramientas",
+                    items: [
+                      { name: "Git", icon: "git" },
+                      { name: "Docker", icon: "docker" },
+                      { name: "Figma", icon: "figma" },
+                      { name: "VS Code", icon: "vscode" },
+                    ],
+                  },
+                ]}
+              />
+            </BentoCard>
+          </div>
+        </section>
+
+        {/* ═══════════════ ASCII ANIMATION ═══════════════ */}
+        <ScrollReveal delay={0}>
+          <AsciiCheems />
+        </ScrollReveal>
+
+        {/* ═══════════════ FOOTER ═══════════════ */}
+        <footer className="bg-canvas border-t border-border-primary py-8 px-8">
+          <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+            <div className="flex items-center gap-2 font-mono text-xs text-faint">
+              <IoCodeSlash className="text-accent-primary" />
+              <span>2026 — Brayan Chumpitaz Angeles</span>
+            </div>
             <a
               href="mailto:brayanchumpitaz9@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 text-primary bg-surface-secondary hover:bg-surface-hover border border-border-primary hover:border-accent-primary rounded-xl px-4 py-3 transition-all duration-200"
+              className="font-mono text-xs text-faint hover:text-accent-primary transition-colors"
             >
-              <MdOutgoingMail className="text-accent-primary text-xl group-hover:scale-110 transition-transform" />
-              <span>Email</span>
+              brayanchumpitaz9@gmail.com
             </a>
-          </BentoCard>
+          </div>
+        </footer>
 
-          {/* Card Sobre Mí */}
-          <BentoCard className="md:col-span-5 md:row-span-2" delay={200}>
-            <SectionHeader icon={<FaUser className="text-lg" />} title="Sobre mí" />
-            <div className="space-y-4 text-secondary">
-              <p>
-                Me llamo Brayan Chumpitaz Angeles. Soy Ingeniero de Sistemas
-                liderando iniciativas para{" "}
-                <span className="text-accent-primary font-medium">
-                  mejorar la experiencia universitaria de estudiantes de todo el Perú.
-                </span>
-              </p>
-              <p>
-                Participé en el{" "}
-                <span className="text-accent-primary font-medium">
-                  Programa de Extensión Universitaria de OSIPTEL
-                </span>{" "}
-                mejorando el acceso a información de telecomunicaciones a nivel nacional.
-              </p>
-              <p>
-                Me apasiona crear soluciones tecnológicas que generen impacto real,
-                combinando desarrollo frontend moderno con automatización e inteligencia artificial.
-              </p>
-            </div>
-          </BentoCard>
-
-          {/* Card de Experiencia UTP */}
-          <BentoCard className="md:col-span-7" delay={300}>
-            <SectionHeader icon={<IoMdBriefcase className="text-xl" />} title="Experiencia Laboral" />
-            <Experience
-              company="Universidad Tecnológica del Perú"
-              role="Analista de Retención"
-              date="Sep 2025 - Actualidad"
-              logo="/logoutp.webp"
-              activities={[
-                "Diseñé flujo automatizado con n8n e IA (83% precisión) para detectar asignaciones docentes incompatibles",
-                "Desarrollé plataforma web para centralizar comunicaciones multicanal, eliminando dependencia de Excel",
-                "Lideré iniciativas de mejora continua con equipos multidisciplinarios",
-              ]}
-            />
-          </BentoCard>
-
-          {/* Card de Experiencia OSIPTEL */}
-          <BentoCard className="md:col-span-7" delay={400}>
-            <Experience
-              company="Organismo Supervisor de Inversión Privada en Telecomunicaciones"
-              role="Practicante Pre Profesional"
-              date="Abr 2025 - Ago 2025"
-              logo="/logoosiptel.webp"
-              activities={[
-                "Desarrollé aplicación web para mejorar el acceso a información de servicios de telecomunicaciones",
-                "Implementé dashboards interactivos para visualización de datos de cobertura y calidad de servicio",
-                "Colaboré con equipos multidisciplinarios para definir requerimientos técnicos",
-              ]}
-            />
-          </BentoCard>
-
-          {/* Card de Proyectos */}
-          <BentoCard className="md:col-span-12" delay={500}>
-            <SectionHeader icon={<GoProject className="text-xl" />} title="Proyectos" />
-            <ProjectsGallery
-              projects={[
-                {
-                  id: "1",
-                  title: "Control de Asignación Docente (CAD)",
-                  images: [
-                    { src: "/proyecto-cad.webp", alt: "Interfaz principal del sistema CAD" },
-                    { src: "/flujon8n.webp", alt: "Flujo de automatización con n8n e IA" },
-                  ],
-                  description:
-                    "Sistema para detectar asignaciones docentes incompatibles usando flujos automatizados con n8n e IA. Logró 83% de precisión en la detección de incompatibilidades.",
-                  technologies: [
-                    { name: "React", icon: "react" },
-                    { name: "TypeScript", icon: "typescript" },
-                    { name: "Vite", icon: "vitejs" },
-                  ],
-                  size: "medium",
-                  isPublic: false,
-                  repoUrl: "https://github.com/usuario/proyecto",
-                  demoUrl: "https://proyecto.vercel.app",
-                },
-                {
-                  id: "2",
-                  title: "SUMA OSIPTEL",
-                  images: [
-                    { src: "/proyecto-suma.webp", alt: "Sistema SUMA OSIPTEL 1" },
-                    { src: "/proyecto-suma-2.webp", alt: "Sistema SUMA OSIPTEL 2" },
-                    { src: "/proyecto-suma-3.webp", alt: "Sistema SUMA OSIPTEL 3" },
-                  ],
-                  description:
-                    "Página web desarrollada para OSIPTEL que facilita el acceso a información de los voluntariados realizados por la institución.",
-                  technologies: [
-                    { name: "HTML", icon: "html5" },
-                    { name: "JavaScript", icon: "javascript" },
-                    { name: "CSS3", icon: "css3" },
-                  ],
-                  size: "medium",
-                  isPublic: true,
-                  repoUrl: "https://github.com/zsergio1/Suma-osiptel",
-                  demoUrl: "https://zsergio1.github.io/Suma-osiptel/",
-                },
-              ]}
-            />
-          </BentoCard>
-
-          {/* Card de Tecnologías */}
-          <BentoCard className="md:col-span-12" delay={600}>
-            <SectionHeader icon={<IoCodeSlash className="text-xl" />} title="Tecnologías" />
-            <Tecnologies
-              categories={[
-                {
-                  title: "Frontend",
-                  items: [
-                    { name: "React", icon: "react" },
-                    { name: "Next.js", icon: "nextjs" },
-                    { name: "TypeScript", icon: "typescript" },
-                    { name: "JavaScript", icon: "javascript" },
-                    { name: "Tailwind CSS", icon: "tailwindcss" },
-                    { name: "HTML5", icon: "html5" },
-                    { name: "CSS3", icon: "css3" },
-                  ],
-                },
-                {
-                  title: "Backend",
-                  items: [
-                    { name: "Node.js", icon: "nodejs" },
-                    { name: "Python", icon: "python" },
-                    { name: "PostgreSQL", icon: "postgresql" },
-                  ],
-                },
-                {
-                  title: "Herramientas",
-                  items: [
-                    { name: "Git", icon: "git" },
-                    { name: "Docker", icon: "docker" },
-                    { name: "Figma", icon: "figma" },
-                    { name: "VS Code", icon: "vscode" },
-                  ],
-                },
-              ]}
-            />
-          </BentoCard>
-        </div>
-
-        {/* Footer */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-faint mt-8 pt-6 border-t border-border-primary animate-fade-in" style={{ animationDelay: "700ms" }}>
-          <p>2026 - Brayan Chumpitaz Angeles</p>
-          <a
-            href="mailto:brayanchumpitaz9@gmail.com"
-            className="hover:text-accent-primary transition-colors"
-          >
-            brayanchumpitaz9@gmail.com
-          </a>
-        </div>
-      </div>
+      </main>
     </div>
   );
 }
