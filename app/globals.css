@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@plugin "tailwindcss-animated";
 /* ─── Color Tokens ─────────────────────────────── */
 :root {
   /* Light */
@@ -217,6 +217,6 @@ h1, h2, h3, h4, h5, h6 {
 *::before,
 *::after {
   transition-property: background-color, border-color, color, box-shadow;
-  transition-duration: 150ms;
+  transition-duration: 300ms;
   transition-timing-function: ease;
 }

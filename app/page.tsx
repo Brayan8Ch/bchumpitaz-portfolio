@@ -16,18 +16,20 @@ function BentoCard({
   children,
   className = "",
   delay = 0,
+  animationClass = "",
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  animationClass?: string;
 }) {
   return (
-    <ScrollReveal delay={delay} className={className}>
+    <ScrollReveal delay={delay} className={className} animationClass={animationClass}>
       <div
         className={`
           relative group bg-surface border border-border-primary rounded-2xl p-5 md:p-6
-          hover:border-border-secondary hover:shadow-lg hover:shadow-accent hover:-translate-y-1
-          transition-all duration-300 overflow-hidden h-full
+          hover:border-border-secondary hover:shadow-lg hover:shadow-accent
+          transition-all duration-1000 ease-out overflow-hidden h-full
         `}
       >
         {children}
@@ -40,13 +42,15 @@ function SectionHeader({
   icon,
   title,
   tag,
+  animationClass = "",
 }: {
   icon: React.ReactNode;
   title: string;
   tag: string;
+  animationClass?: string;
 }) {
   return (
-    <ScrollReveal className="mb-20">
+    <ScrollReveal className="mb-20" animationClass={animationClass}>
       <p className="font-mono text-xs text-muted mb-2 tracking-wide">{`// ${tag}`}</p>
       <div className="flex items-center gap-4">
         <span className="text-accent-primary text-xl shrink-0">{icon}</span>
@@ -83,11 +87,11 @@ export default function Home() {
           {/* Ambient Glow */}
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
           <div className="max-w-5xl mx-auto px-4 md:px-8 relative z-10">
-            <SectionHeader icon={<HiUser />} title="Sobre mí" tag="about_me.tsx" />
+            <SectionHeader icon={<HiUser />} title="Sobre mí" tag="about_me.tsx" animationClass="animate-fade-up" />
 
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
               {/* Bio */}
-              <BentoCard className="lg:col-span-3 order-2 lg:order-1" delay={0}>
+              <BentoCard className="lg:col-span-3 order-2 lg:order-1" delay={0} animationClass="animate-fade-up">
                 {/* Terminal comment header */}
                 <p className="font-mono text-xs text-muted mb-4 select-none">
                   {'/* brayan_chumpitaz_angeles.txt */'}
@@ -116,9 +120,8 @@ export default function Home() {
               </BentoCard>
 
               {/* Photo + location */}
-              <ScrollReveal delay={100} className="lg:col-span-2 flex flex-col items-center gap-6 order-1 lg:order-2">
-                <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-br from-[#10b981] to-[#6366f1] rounded-2xl opacity-0 group-hover:opacity-40 blur transition-opacity duration-500" />
+              <ScrollReveal delay={100} className="lg:col-span-2 flex flex-col items-center gap-6 order-1 lg:order-2" animationClass="animate-fade-up">
+                <div className="relative">
                   <Image
                     src="/photo.webp"
                     width={220}
@@ -126,10 +129,10 @@ export default function Home() {
                     alt="Brayan Chumpitaz"
                     priority
                     sizes="220px"
-                    className="relative rounded-2xl w-40 h-40 md:w-52 md:h-52 object-cover border border-border-primary group-hover:scale-[1.02] transition-transform duration-300"
+                    className="relative rounded-2xl w-40 h-40 md:w-52 md:h-52 object-cover border border-border-primary hover:border-border-secondary hover:shadow-lg hover:shadow-accent hover:scale-[1.02] transition-all duration-1000 ease-out"
                   />
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-border-primary bg-surface text-sm font-mono">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-border-primary bg-surface text-sm font-mono  mt-4">
                   <span className="w-2 h-2 rounded-full bg-accent-primary animate-pulse-glow shrink-0" />
                   <span className="text-muted">Lima, Peru</span>
                 </div>

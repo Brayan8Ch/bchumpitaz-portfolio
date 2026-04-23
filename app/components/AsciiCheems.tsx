@@ -33,7 +33,7 @@ export default function AsciiCheems() {
         </pre>
       </div>
       <p className="mt-8 font-mono text-sm text-muted animate-pulse">
-        {'// Much code. Very frontend. Wow.'}
+        {'// Mucho código. Me dió amsiedad.'}
       </p>
     </div>
   )
