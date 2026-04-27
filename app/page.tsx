@@ -9,6 +9,7 @@ import { HiUser, HiBriefcase, HiFolderOpen, HiCpuChip } from "react-icons/hi2";
 import { IoCodeSlash } from "react-icons/io5";
 import ScrollReveal from "./components/ScrollReveal";
 import AsciiCheems from "./components/AsciiCheems";
+import { projects } from "./data/projects";
 
 // ─── Shared primitives ───────────────────────────────────────────────────────
 
@@ -189,49 +190,7 @@ export default function Home() {
               <p className="font-mono text-xs text-muted mb-5 select-none">
                 {'// featured projects'}
               </p>
-              <ProjectsGallery
-                projects={[
-                  {
-                    id: "1",
-                    title: "Control de Asignación Docente (CAD)",
-                    images: [
-                      { src: "/proyecto-cad.webp", alt: "Interfaz principal del sistema CAD" },
-                      { src: "/flujon8n.webp", alt: "Flujo de automatización con n8n e IA" },
-                    ],
-                    description:
-                      "Sistema para detectar asignaciones docentes incompatibles usando flujos automatizados con n8n e IA. Logró 83% de precisión en la detección de incompatibilidades.",
-                    technologies: [
-                      { name: "React", icon: "react" },
-                      { name: "TypeScript", icon: "typescript" },
-                      { name: "Vite", icon: "vitejs" },
-                    ],
-                    size: "medium",
-                    isPublic: false,
-                    repoUrl: "https://github.com/usuario/proyecto",
-                    demoUrl: "https://proyecto.vercel.app",
-                  },
-                  {
-                    id: "2",
-                    title: "SUMA OSIPTEL",
-                    images: [
-                      { src: "/proyecto-suma.webp", alt: "Sistema SUMA OSIPTEL 1" },
-                      { src: "/proyecto-suma-2.webp", alt: "Sistema SUMA OSIPTEL 2" },
-                      { src: "/proyecto-suma-3.webp", alt: "Sistema SUMA OSIPTEL 3" },
-                    ],
-                    description:
-                      "Página web desarrollada para OSIPTEL que facilita el acceso a información de los voluntariados realizados por la institución.",
-                    technologies: [
-                      { name: "HTML", icon: "html5" },
-                      { name: "JavaScript", icon: "javascript" },
-                      { name: "CSS3", icon: "css3" },
-                    ],
-                    size: "medium",
-                    isPublic: true,
-                    repoUrl: "https://github.com/zsergio1/Suma-osiptel",
-                    demoUrl: "https://zsergio1.github.io/Suma-osiptel/",
-                  },
-                ]}
-              />
+              <ProjectsGallery projects={projects} />
             </BentoCard>
           </div>
         </section>

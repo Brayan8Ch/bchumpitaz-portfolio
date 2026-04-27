@@ -1,17 +1,6 @@
 import React from "react";
 import ProjectCard from "./ProjectCard";
-
-interface Project {
-  id: string;
-  title: string;
-  images: { src: string; alt: string }[];
-  description: string;
-  technologies: { name: string; icon: string }[];
-  size?: "small" | "medium" | "large";
-  repoUrl?: string;
-  demoUrl?: string;
-  isPublic?: boolean;
-}
+import { Project } from "../data/projects";
 
 interface ProjectsGalleryProps {
   projects: Project[];
@@ -27,6 +16,7 @@ function ProjectsGallery({ projects }: ProjectsGalleryProps) {
           images={project.images}
           description={project.description}
           technologies={project.technologies}
+          aiTools={project.aiTools}
           size={project.size}
           repoUrl={project.repoUrl}
           demoUrl={project.demoUrl}
