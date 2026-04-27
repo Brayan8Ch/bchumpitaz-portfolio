@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
+import { HiSparkles } from "react-icons/hi2";
 
 interface ProjectCardProps {
   title: string;
   images: { src: string; alt: string }[];
   description: string;
-  technologies: { name: string; icon: string }[];
+  technologies: { name: string; icon: string; iconUrl?: string }[];
+  aiTools?: { name: string }[];
   size?: "small" | "medium" | "large";
   repoUrl?: string;
   demoUrl?: string;
@@ -21,6 +23,7 @@ function ProjectCard({
   images,
   description,
   technologies,
+  aiTools,
   size = "small",
   repoUrl,
   demoUrl,
@@ -190,6 +193,21 @@ function ProjectCard({
           {description}
         </p>
 
+        {/* AI Tools */}
+        {aiTools && aiTools.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {aiTools.map((tool, index) => (
+              <span
+                key={index}
+                className="flex items-center gap-1.5 bg-violet-500/10 border border-violet-500/30 px-2.5 py-1.5 rounded-lg text-xs md:text-sm text-violet-300 hover:border-violet-400/50 hover:bg-violet-500/15 transition-colors"
+              >
+                <HiSparkles className="text-violet-400 shrink-0" />
+                {tool.name}
+              </span>
+            ))}
+          </div>
+        )}
+
         <div className="flex flex-wrap gap-2 mt-auto pt-2">
           {technologies.map((tech, index) => (
             <span
@@ -198,7 +216,7 @@ function ProjectCard({
             >
               <img
                 className="h-4 w-4"
-                src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.icon}/${tech.icon}-original.svg`}
+                src={tech.iconUrl ?? `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.icon}/${tech.icon}-original.svg`}
                 alt={tech.name}
                 width={16}
                 height={16}
