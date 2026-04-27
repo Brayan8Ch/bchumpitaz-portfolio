@@ -158,9 +158,10 @@ export default function Home() {
                   logo: "/logoutp.webp",
                   current: true,
                   activities: [
+                    "Desarrollé una plataforma usando Power Apps + Power Automate para centralizar la gestión de solicitudes de comunicaciones a estudiantes.",
+                    "Desarrollé herramienta web de programación de comunicaciones (Con TypeScript + GitHub Copilot) que automatiza planificación multicanal: transforma inputs (fecha/canal/descripción) en JSON estructurado reemplazando proceso manual.",
                     "Diseñé flujo automatizado con n8n e IA (83% precisión) para detectar asignaciones docentes incompatibles",
-                    "Desarrollé plataforma web para centralizar comunicaciones multicanal, eliminando dependencia de Excel",
-                    "Lideré iniciativas de mejora continua con equipos multidisciplinarios",
+
                   ],
                 },
                 {
@@ -171,7 +172,7 @@ export default function Home() {
                   activities: [
                     "Desarrollé aplicación web para mejorar el acceso a información de servicios de telecomunicaciones",
                     "Implementé dashboards interactivos para visualización de datos de cobertura y calidad de servicio",
-                    "Colaboré con equipos multidisciplinarios para definir requerimientos técnicos",
+                    "Ejecuté pruebas funcionales en SISREP (Sistema de Información y Registro de Interrupciones), validé casos de uso críticos, identifiqué bugs técnicos y aseguré calidad antes de producción",
                   ],
                 },
               ]}
@@ -186,12 +187,12 @@ export default function Home() {
           <div className="max-w-5xl mx-auto px-4 md:px-8 relative z-10">
             <SectionHeader icon={<HiFolderOpen />} title="Proyectos" tag="projects/index.ts" />
 
-            <BentoCard delay={0}>
+            <>
               <p className="font-mono text-xs text-muted mb-5 select-none">
                 {'// featured projects'}
               </p>
               <ProjectsGallery projects={projects} />
-            </BentoCard>
+            </>
           </div>
         </section>
 

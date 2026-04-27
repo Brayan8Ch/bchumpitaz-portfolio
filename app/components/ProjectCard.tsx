@@ -12,7 +12,7 @@ interface ProjectCardProps {
   description: string;
   technologies: { name: string; icon: string; iconUrl?: string }[];
   aiTools?: { name: string }[];
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | "full";
   repoUrl?: string;
   demoUrl?: string;
   isPublic?: boolean;
@@ -68,6 +68,7 @@ function ProjectCard({
     small: "",
     medium: "md:col-span-2",
     large: "md:col-span-2 md:row-span-2",
+    full: "md:col-span-4",
   };
 
   const getAnimationClass = () => {
@@ -97,7 +98,7 @@ function ProjectCard({
               src={images[currentIndex].src}
               alt={images[currentIndex].alt}
               fill
-              className="object-contain"
+              className="object-cover"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               loading="lazy"
             />
@@ -110,7 +111,7 @@ function ProjectCard({
             <button
               onClick={goToPrevious}
               disabled={isAnimating}
-              className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-[#111827]/90 backdrop-blur-sm border border-[#374151] text-white hover:bg-[#1f2937] hover:border-[#10b981] transition-all duration-200 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-[#111827]/90 backdrop-blur-sm border border-[#374151] text-white hover:bg-[#1f2937] hover:border-[#10b981] transition-all duration-200 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed opacity-0 group-hover:opacity-100"
               aria-label="Imagen anterior"
             >
               <IoChevronBack className="text-lg" />
@@ -118,7 +119,7 @@ function ProjectCard({
             <button
               onClick={goToNext}
               disabled={isAnimating}
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-[#111827]/90 backdrop-blur-sm border border-[#374151] text-white hover:bg-[#1f2937] hover:border-[#10b981] transition-all duration-200 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-[#111827]/90 backdrop-blur-sm border border-[#374151] text-white hover:bg-[#1f2937] hover:border-[#10b981] transition-all duration-200 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed opacity-0 group-hover:opacity-100"
               aria-label="Imagen siguiente"
             >
               <IoChevronForward className="text-lg" />
@@ -141,10 +142,6 @@ function ProjectCard({
               ))}
             </div>
 
-            {/* Image counter */}
-            <div className="absolute top-3 left-3 bg-[#111827]/80 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-lg">
-              {currentIndex + 1} / {images.length}
-            </div>
           </>
         )}
 
@@ -215,7 +212,7 @@ function ProjectCard({
               className="flex items-center gap-1.5 bg-surface border border-border-primary px-2.5 py-1.5 rounded-lg text-xs md:text-sm text-secondary hover:border-accent-primary/40 transition-colors"
             >
               <img
-                className="h-4 w-4"
+                className={`h-4 w-4 ${tech.icon === "vercel" ? "rounded-full bg-white p-[1px]" : ""}`}
                 src={tech.iconUrl ?? `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.icon}/${tech.icon}-original.svg`}
                 alt={tech.name}
                 width={16}

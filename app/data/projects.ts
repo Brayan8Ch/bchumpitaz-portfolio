@@ -20,7 +20,7 @@ export interface Project {
   description: string;
   technologies: Technology[];
   aiTools?: AiTool[];
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | "full";
   repoUrl?: string;
   demoUrl?: string;
   isPublic?: boolean;
@@ -39,9 +39,11 @@ export const projects: Project[] = [
     description:
       "Herramienta para docentes que genera guías de indagación Eureka con 3 agentes de IA: investigador, validador y redactor de clase.",
     technologies: [
+      { name: "React", icon: "react" },
       { name: "TypeScript", icon: "typescript" },
       { name: "Python", icon: "python" },
       { name: "Vercel", icon: "vercel" },
+      {name:"railway", icon:"railway"}
     ],
     aiTools: [
       { name: "Claude Code" },
@@ -49,7 +51,7 @@ export const projects: Project[] = [
       { name: "Lovable" },
 
     ],
-    size: "medium",
+    size: "full",
     isPublic: true,
     demoUrl: "https://hackaton-eurekreando.vercel.app/",
     repoUrl: "https://github.com/Brayan8Ch/HackatonEurekreando"
