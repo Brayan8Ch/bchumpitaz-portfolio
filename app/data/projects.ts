@@ -29,6 +29,32 @@ export interface Project {
 export const projects: Project[] = [
 
   {
+    id: "6",
+    title: "Gestor de Gastos Personales",
+    images: [
+      { src: "/proyecto-gestor-gastos-1.webp", alt: "Dashboard con saldo, flujo mensual y distribución de egresos" },
+      { src: "/proyecto-gestor-gastos-2.webp", alt: "Detalle de transacción con categoría y monto" },
+      { src: "/proyecto-gestor-gastos-3.webp", alt: "Modal para registrar nueva transacción" },
+    ],
+    description:
+      "Herramienta para gestionar ingresos y egresos personales. Dashboard con flujo mensual, distribución por categoría, base de ahorro y gestión de tarjetas. Usuario de prueba: prueba@prueba.com | 123456",
+    technologies: [
+      { name: "React", icon: "react" },
+      { name: "TypeScript", icon: "typescript" },
+      { name: "Vite", icon: "vitejs" },
+      { name: "Tailwind CSS", icon: "tailwindcss" },
+      { name: "Supabase", icon: "supabase" },
+      { name: "Vercel", icon: "vercel" },
+    ],
+    aiTools: [
+      { name: "Claude Code" },
+    ],
+    size: "full",
+    isPublic: true,
+    repoUrl: "https://github.com/Brayan8Ch/GestorGastosPersonales",
+    demoUrl: "https://gestor-gastos-personales.vercel.app/",
+  },
+  {
     id: "3",
     title: "EureKreando",
     images: [
@@ -43,7 +69,7 @@ export const projects: Project[] = [
       { name: "TypeScript", icon: "typescript" },
       { name: "Python", icon: "python" },
       { name: "Vercel", icon: "vercel" },
-      {name:"railway", icon:"railway"}
+      { name: "railway", icon: "railway" }
     ],
     aiTools: [
       { name: "Claude Code" },
