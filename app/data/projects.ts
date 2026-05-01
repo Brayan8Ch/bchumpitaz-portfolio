@@ -32,9 +32,9 @@ export const projects: Project[] = [
     id: "6",
     title: "Gestor de Gastos Personales",
     images: [
-      { src: "/proyecto-gestor-gastos-1.webp", alt: "Dashboard con saldo, flujo mensual y distribución de egresos" },
-      { src: "/proyecto-gestor-gastos-2.webp", alt: "Detalle de transacción con categoría y monto" },
-      { src: "/proyecto-gestor-gastos-3.webp", alt: "Modal para registrar nueva transacción" },
+      { src: "/proyecto-gestor-gastos-1.png", alt: "Dashboard con saldo, flujo mensual y distribución de egresos" },
+      { src: "/proyecto-gestor-gastos-2.png", alt: "Detalle de transacción con categoría y monto" },
+      { src: "/proyecto-gestor-gastos-3.png", alt: "Modal para registrar nueva transacción" },
     ],
     description:
       "Herramienta para gestionar ingresos y egresos personales. Dashboard con flujo mensual, distribución por categoría, base de ahorro y gestión de tarjetas. Usuario de prueba: prueba@prueba.com | 123456",
@@ -49,7 +49,7 @@ export const projects: Project[] = [
     aiTools: [
       { name: "Claude Code" },
     ],
-    size: "full",
+    size: "medium",
     isPublic: true,
     repoUrl: "https://github.com/Brayan8Ch/GestorGastosPersonales",
     demoUrl: "https://gestor-gastos-personales.vercel.app/",
@@ -77,7 +77,7 @@ export const projects: Project[] = [
       { name: "Lovable" },
 
     ],
-    size: "full",
+    size: "medium",
     isPublic: true,
     demoUrl: "https://hackaton-eurekreando.vercel.app/",
     repoUrl: "https://github.com/Brayan8Ch/HackatonEurekreando"
